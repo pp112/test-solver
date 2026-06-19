@@ -13,4 +13,4 @@ class App:
 
     def on_new_file(self, path: Path):
         answer = self.ollama.ask_with_image(path)
-        print(answer)
+        print(f"Ответ {self.ollama.model}: {answer}")

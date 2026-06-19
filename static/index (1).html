@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test Solver — Бланк</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="sheet">
+
+    <!-- HEADER: like a form title block -->
+    <header class="sheet-header">
+      <div class="header-left">
+        <span class="eyebrow">Лист ответов</span>
+        <h1>Test Solver</h1>
+      </div>
+      <div class="header-right">
+        <div class="field">
+          <span class="field-label">№ вопроса</span>
+          <span class="field-value">042</span>
+        </div>
+        <div class="field">
+          <span class="field-label">время</span>
+          <span class="field-value">14:32:08</span>
+        </div>
+      </div>
+    </header>
+
+    <hr class="rule">
+
+    <!-- SCREENSHOT, pasted in like an attachment -->
+    <section class="exhibit">
+      <span class="exhibit-label">Приложение · 42.png</span>
+      <div class="exhibit-frame">
+        <span class="tape tape-left"></span>
+        <span class="tape tape-right"></span>
+        <img src="https://placehold.co/700x380/fbf8f1/8a8070?text=%D1%81%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA+%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%D0%B0" alt="скриншот вопроса">
+      </div>
+    </section>
+
+    <!-- ANSWER ZONE - in progress -->
+    <section class="review in-progress">
+      <div class="review-header">
+        <div class="reviewer">
+          <span class="reviewer-label">Проверяющий</span>
+          <span class="reviewer-name">qwen2.5vl:7b <em>(локальная модель)</em></span>
+        </div>
+        <div class="stamp stamp-pending">
+          <span class="stamp-text">в работе</span>
+          <span class="pencil-scratch">
+            <span></span><span></span><span></span>
+          </span>
+        </div>
+      </div>
+
+      <div class="margin-note">
+        <span class="margin-note-label">черновик рассуждения</span>
+        <p class="margin-note-text">
+          Читаю вопрос: речь о тепловом эффекте реакции нейтрализации.
+          Сопоставляю варианты A–D со значением ΔH...<span class="caret"></span>
+        </p>
+      </div>
+    </section>
+
+    <hr class="rule rule-light">
+
+    <!-- ANSWER ZONE - completed, for reference -->
+    <section class="review done">
+      <div class="review-header">
+        <div class="reviewer">
+          <span class="reviewer-label">Проверяющий</span>
+          <span class="reviewer-name">qwen2.5vl:7b <em>(локальная модель)</em></span>
+        </div>
+        <div class="stamp stamp-done">
+          <span class="stamp-text">проверено</span>
+        </div>
+      </div>
+
+      <div class="final-answer">
+        <span class="final-answer-label">Ответ</span>
+        <p>
+          Правильный вариант — <strong>C</strong>. Реакция нейтрализации экзотермическая,
+          выделяется около 57 кДж/моль, что соответствует только варианту C по знаку и порядку величины.
+        </p>
+      </div>
+    </section>
+
+    <footer class="sheet-footer">localhost:8000 · обновляется автоматически</footer>
+
+  </div>
+
+</body>
+</html>

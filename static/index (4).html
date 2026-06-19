@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test Solver — Панель</title>
+<link rel="stylesheet" href="styles (4).css">
+</head>
+<body>
+
+  <div class="app-container">
+
+    <header class="app-header">
+      <div class="header-main">
+        <span class="badge-live"><span class="dot"></span> Live</span>
+        <h1>Test Solver</h1>
+      </div>
+      <div class="header-stats">
+        <div class="stat-field">
+          <span class="stat-label">Всего вопросов</span>
+          <span class="stat-value">042</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="stream">
+
+      <section class="card done">
+        <header class="card-header">
+          <div class="meta-info">
+            <span class="meta-index">№ 41</span>
+            <span class="meta-file">snapshot_41.png</span>
+          </div>
+          <span class="status-badge status-done">Проверено</span>
+        </header>
+
+        <div class="card-body">
+          <div class="image-frame">
+            <img src="https://placehold.co/700x300/f8f9fa/6c757d?text=%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA+41" alt="Вопрос 41">
+          </div>
+          
+          <div class="answer-block">
+            <span class="answer-label">Ответ модели (qwen2.5vl:7b):</span>
+            <p>Правильный вариант — <strong>B</strong>. Скорость реакции возрастает с температурой согласно уравнению Аррениуса.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="card processing">
+        <header class="card-header">
+          <div class="meta-info">
+            <span class="meta-index">№ 42</span>
+            <span class="meta-file">snapshot_42.png</span>
+          </div>
+          <span class="status-badge status-progress">
+            Решает
+            <span class="loading-dots"><span></span><span></span><span></span></span>
+          </span>
+        </header>
+
+        <div class="card-body">
+          <div class="image-frame">
+            <img src="https://placehold.co/700x300/f8f9fa/6c757d?text=%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA+42" alt="Вопрос 42">
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="app-footer">
+      <span class="footer-status">Мониторинг папки <code>screenshots/</code></span>
+      <span class="footer-host">localhost:8000</span>
+    </footer>
+
+  </div>
+
+</body>
+</html>

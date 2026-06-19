@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test Solver — Поток</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="app">
+
+    <!-- TOP BAR -->
+    <header class="topbar">
+      <div class="topbar-title">
+        <span class="dot-live"></span>
+        Test Solver
+      </div>
+      <span class="topbar-count">42 вопроса</span>
+    </header>
+
+    <!-- STREAM -->
+    <main class="stream">
+
+      <!-- ===== older, resolved exchange ===== -->
+      <div class="exchange">
+        <div class="bubble bubble-shot">
+          <div class="bubble-meta">
+            <span class="meta-name">41.png</span>
+            <span class="meta-time">14:30:55</span>
+          </div>
+          <img src="https://placehold.co/520x260/2a2e33/767e85?text=%D1%81%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA+41" alt="скриншот 41">
+        </div>
+
+        <div class="bubble bubble-answer">
+          <div class="bubble-meta">
+            <span class="meta-name">qwen2.5vl:7b</span>
+            <span class="meta-status status-done">● готово</span>
+          </div>
+          <p>Правильный вариант — <strong>B</strong>. Скорость реакции возрастает с температурой согласно уравнению Аррениуса.</p>
+        </div>
+      </div>
+
+      <!-- ===== current, in-progress exchange ===== -->
+      <div class="exchange">
+        <div class="bubble bubble-shot">
+          <div class="bubble-meta">
+            <span class="meta-name">42.png</span>
+            <span class="meta-time">14:32:08</span>
+          </div>
+          <img src="https://placehold.co/520x260/2a2e33/767e85?text=%D1%81%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA+42" alt="скриншот 42">
+        </div>
+
+        <div class="bubble bubble-answer bubble-typing">
+          <div class="bubble-meta">
+            <span class="meta-name">qwen2.5vl:7b</span>
+            <span class="meta-status status-typing">
+              думает
+              <span class="typing-dots"><span></span><span></span><span></span></span>
+            </span>
+          </div>
+          <p class="thinking-text">
+            Читаю вопрос про тепловой эффект нейтрализации. Сопоставляю варианты A–D со значением ΔH...<span class="cursor"></span>
+          </p>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- STATUS FOOTER -->
+    <footer class="status-bar">
+      <span class="status-bar-dot"></span>
+      следит за папкой <code>screenshots/</code> · localhost:8000
+    </footer>
+
+  </div>
+
+</body>
+</html>

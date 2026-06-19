@@ -1,0 +1,1 @@
+find . \( -name ".venv" -prune \) -o -type f -name "*.py" -exec echo {} \; -exec cat {} \; > code.txt

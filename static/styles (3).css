@@ -1,0 +1,235 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root{
+    --bg: #F5F7FA;
+    --card: #FFFFFF;
+
+    --text: #1F2937;
+    --text-soft: #6B7280;
+    --text-faint: #94A3B8;
+
+    --border: #E5E7EB;
+
+    --blue: #3B82F6;
+    --blue-soft: #EFF6FF;
+
+    --green: #10B981;
+    --green-soft: #ECFDF5;
+
+    --shadow:
+        0 1px 2px rgba(0,0,0,0.04),
+        0 8px 24px rgba(0,0,0,0.04);
+
+    --radius: 16px;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:var(--bg);
+    font-family:'Inter',sans-serif;
+    color:var(--text);
+    min-height:100vh;
+}
+
+.app{
+    max-width:900px;
+    margin:0 auto;
+    padding:24px;
+}
+
+/* ---------- TOPBAR ---------- */
+
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    margin-bottom:24px;
+    padding:18px 22px;
+
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+
+    box-shadow:var(--shadow);
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    font-weight:700;
+    font-size:15px;
+}
+
+.brand-dot{
+    width:10px;
+    height:10px;
+    border-radius:50%;
+
+    background:var(--green);
+}
+
+.question-meta{
+    display:flex;
+    align-items:center;
+    gap:16px;
+}
+
+.question-id{
+    font-weight:700;
+    color:var(--blue);
+}
+
+.question-time{
+    color:var(--text-soft);
+    font-size:14px;
+}
+
+/* ---------- CONTENT ---------- */
+
+.content{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.card{
+    background:var(--card);
+
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+
+    box-shadow:var(--shadow);
+
+    overflow:hidden;
+}
+
+.card-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:20px 22px;
+
+    border-bottom:1px solid var(--border);
+}
+
+.card-label{
+    display:block;
+
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+
+    color:var(--text-faint);
+
+    margin-bottom:6px;
+}
+
+.card-header h2{
+    font-size:18px;
+    font-weight:600;
+}
+
+/* ---------- SCREENSHOT ---------- */
+
+.screenshot{
+    padding:20px;
+}
+
+.screenshot img{
+    display:block;
+    width:100%;
+
+    border-radius:12px;
+    border:1px solid var(--border);
+}
+
+/* ---------- STATUS ---------- */
+
+.status{
+    display:flex;
+    align-items:center;
+    gap:8px;
+
+    padding:8px 12px;
+
+    border-radius:999px;
+
+    font-size:13px;
+    font-weight:600;
+}
+
+.status.done{
+    background:var(--green-soft);
+    color:var(--green);
+}
+
+.status-dot{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+
+    background:currentColor;
+}
+
+/* ---------- ANSWER ---------- */
+
+.answer{
+    padding:24px;
+}
+
+.answer p{
+    line-height:1.75;
+    font-size:15px;
+}
+
+.answer p + p{
+    margin-top:14px;
+}
+
+.answer strong{
+    color:var(--blue);
+}
+
+/* ---------- FOOTER ---------- */
+
+.footer{
+    text-align:center;
+
+    margin-top:20px;
+
+    color:var(--text-faint);
+    font-size:13px;
+}
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 640px){
+
+    .app{
+        padding:14px;
+    }
+
+    .topbar{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:12px;
+    }
+
+    .card-header{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:12px;
+    }
+
+}
+

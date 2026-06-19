@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test Solver — Monitor</title>
+<style>
+
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap');
+
+  :root{
+    --bg: #0B0E0F;
+    --panel: #13171A;
+    --panel-2: #171C1F;
+    --border: #232A2D;
+    --text: #E4E7E5;
+    --text-dim: #7A8480;
+    --text-faint: #4D5557;
+    --accent: #5EE6A8;
+    --accent-dim: #2E6B52;
+    --amber: #E6A85E;
+    --amber-dim: #6B5430;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Inter', sans-serif;
+  }
+
+  *{ box-sizing: border-box; margin:0; padding:0; }
+
+  body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    min-height: 100vh;
+    padding: 28px;
+    background-image:
+      radial-gradient(circle at 50% 0%, rgba(94,230,168,0.04), transparent 60%);
+  }
+
+  .app{
+    max-width: 880px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  /* ---------- TOP BAR ---------- */
+  .topbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--panel);
+  }
+
+  .topbar-left{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .topbar-title{
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+  }
+
+  .status-pill{
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent);
+    padding: 5px 10px;
+    border: 1px solid var(--accent-dim);
+    border-radius: 100px;
+    background: rgba(94,230,168,0.06);
+  }
+
+  .status-dot{
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+  }
+
+  .counter{
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-faint);
+  }
+
+  /* ---------- SCREENSHOT CARD ---------- */
+  .card{
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--panel);
+    overflow: hidden;
+  }
+
+  .card-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .card-header-label{
+    display: flex;
+    align-items: center;
+    gap: 9px;
+  }
+
+  .file-icon{
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    color: var(--text-dim);
+  }
+
+  .filename{
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--text);
+  }
+
+  .filename-ext{
+    color: var(--text-faint);
+  }
+
+  .timestamp{
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-faint);
+  }
+
+  .screenshot-frame{
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+  }
+
+  .screenshot-frame img{
+    max-width: 100%;
+    max-height: 420px;
+    border-radius: 4px;
+    display: block;
+  }
+
+  /* ---------- ANSWER CARD ---------- */
+  .answer-card{
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--panel);
+  }
+
+  .answer-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 13px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .model-tag{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .model-name{
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .model-badge{
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+    padding: 2px 7px;
+    border-radius: 4px;
+    letter-spacing: 0.04em;
+  }
+
+  /* thinking pulse — signature element */
+  .pulse-wave{
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    height: 16px;
+  }
+
+  .pulse-bar{
+    width: 3px;
+    background: var(--amber);
+    border-radius: 2px;
+    animation: pulse 1.1s ease-in-out infinite;
+  }
+  .pulse-bar:nth-child(1){ height: 6px;  animation-delay: 0s; }
+  .pulse-bar:nth-child(2){ height: 14px; animation-delay: 0.12s; }
+  .pulse-bar:nth-child(3){ height: 9px;  animation-delay: 0.24s; }
+  .pulse-bar:nth-child(4){ height: 16px; animation-delay: 0.36s; }
+  .pulse-bar:nth-child(5){ height: 7px;  animation-delay: 0.48s; }
+  .pulse-bar:nth-child(6){ height: 12px; animation-delay: 0.6s; }
+
+  @keyframes pulse{
+    0%, 100% { opacity: 0.35; transform: scaleY(0.6); }
+    50% { opacity: 1; transform: scaleY(1); }
+  }
+
+  .state-label{
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--amber);
+    letter-spacing: 0.03em;
+  }
+
+  /* body of the answer */
+  .answer-body{
+    padding: 18px 20px 20px;
+  }
+
+  .reasoning-block{
+    font-family: var(--mono);
+    font-size: 12.5px;
+    line-height: 1.6;
+    color: var(--text-faint);
+    border-left: 2px solid var(--border);
+    padding-left: 12px;
+    margin-bottom: 16px;
+  }
+
+  .reasoning-block .typed-cursor{
+    display: inline-block;
+    width: 6px;
+    height: 13px;
+    background: var(--amber);
+    margin-left: 2px;
+    vertical-align: -2px;
+    animation: blink 1s step-end infinite;
+  }
+
+  @keyframes blink{
+    50% { opacity: 0; }
+  }
+
+  .answer-text{
+    font-family: var(--sans);
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--text);
+  }
+
+  .answer-text strong{
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .divider-label{
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  /* ---------- SECOND EXAMPLE: completed answer (no pulse) ---------- */
+  .answer-card.done .answer-header{
+    /* no border change needed, just structural example below */
+  }
+
+  .footer-note{
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-faint);
+    padding-top: 6px;
+  }
+
+</style>
+</head>
+<body>
+
+  <div class="app">
+
+    <!-- TOP BAR -->
+    <div class="topbar">
+      <div class="topbar-left">
+        <span class="topbar-title">Test Solver</span>
+      </div>
+      <div class="topbar-left">
+        <span class="counter">#0042</span>
+        <div class="status-pill">
+          <span class="status-dot"></span>
+          мониторинг активен
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREENSHOT CARD -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-header-label">
+          <svg class="file-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
+            <circle cx="9" cy="9" r="1.7"/>
+            <path d="M21 15l-5-5L5 21"/>
+          </svg>
+          <span class="filename">42<span class="filename-ext">.png</span></span>
+        </div>
+        <span class="timestamp">получен 14:32:08</span>
+      </div>
+      <div class="screenshot-frame">
+        <img src="https://placehold.co/760x420/1a1f22/5a6360?text=%D1%81%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA+%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%D0%B0" alt="скриншот вопроса">
+      </div>
+    </div>
+
+    <!-- ANSWER CARD — in progress -->
+    <div class="answer-card">
+      <div class="answer-header">
+        <div class="model-tag">
+          <span class="model-name">qwen2.5vl:7b</span>
+          <span class="model-badge">OLLAMA · LOCAL</span>
+        </div>
+        <div class="model-tag">
+          <span class="state-label">формирует ответ</span>
+          <div class="pulse-wave">
+            <div class="pulse-bar"></div>
+            <div class="pulse-bar"></div>
+            <div class="pulse-bar"></div>
+            <div class="pulse-bar"></div>
+            <div class="pulse-bar"></div>
+            <div class="pulse-bar"></div>
+          </div>
+        </div>
+      </div>
+      <div class="answer-body">
+        <span class="divider-label">ход рассуждения</span>
+        <div class="reasoning-block">
+          Читаю вопрос: речь о тепловом эффекте реакции нейтрализации.
+          Сопоставляю варианты A–D с известным значением ΔH...
+          Вариант C совпадает по знаку и порядку величины<span class="typed-cursor"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ANSWER CARD — completed example, for reference -->
+    <div class="answer-card done">
+      <div class="answer-header">
+        <div class="model-tag">
+          <span class="model-name">qwen2.5vl:7b</span>
+          <span class="model-badge">OLLAMA · LOCAL</span>
+        </div>
+        <div class="model-tag">
+          <span class="state-label" style="color: var(--accent);">ответ готов</span>
+        </div>
+      </div>
+      <div class="answer-body">
+        <span class="divider-label">ответ</span>
+        <p class="answer-text">
+          Правильный вариант — <strong>C</strong>. Реакция нейтрализации экзотермическая,
+          выделяется около 57 кДж/моль, что соответствует только варианту C по знаку и порядку величины.
+        </p>
+      </div>
+    </div>
+
+    <div class="footer-note">localhost:8000 · обновление в реальном времени</div>
+
+  </div>
+
+</body>
+</html>

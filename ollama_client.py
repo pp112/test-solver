@@ -8,13 +8,15 @@ SYSTEM_PROMPT = """Ты помощник для решения тестов.
 Тебе будут присылаться скриншоты вопросов с вариантами ответов.
 Твоя задача — внимательно прочитать вопрос и все варианты ответов, 
 затем выбрать правильный вариант или несколько правильных вариантов.
+Также вопросы могут приходить в текстовом формате или без вариантов ответов. 
+Если нет вариантов, то надо дать развернутый ответ.
 """
 
 
 class OllamaClient:
     """Клиент для работы с Ollama API с поддержкой vision и сессии чата."""
 
-    def __init__(self, model: str = "gemma3:4b"):
+    def __init__(self, model: str = "gemma4:e4b"):
         self.model = model
         self.client = Client()
         self.history: list[dict] = []
@@ -29,7 +31,7 @@ class OllamaClient:
 
         message = {
             "role": "user",
-            "content": "Реши этот вопрос теста:",
+            "content": "Реши вопрос(ы):",
             "images": [image_b64]
         }
         self.history.append(message)
@@ -46,6 +48,7 @@ class OllamaClient:
         if self._initialized:
             return
 
+        print(f"Инициализация чата {self.model}")
         self.history = []
         init_message = {
             "role": "user",
@@ -56,14 +59,24 @@ class OllamaClient:
         response = self._send_request()
         self.history.append({"role": "assistant", "content": response})
         self._initialized = True
+        print(self.history)
 
     def _send_request(self) -> str:
-        """Отправить текущую историю чата в Ollama и получить ответ."""
-        response = self.client.chat(
+        full_response = ""
+
+        stream = self.client.chat(
             model=self.model,
-            messages=self.history
+            messages=self.history,
+            stream=True
         )
-        return response["message"]["content"]
+
+        for chunk in stream:
+            content = chunk["message"]["content"]
+            print(content, end="", flush=True)
+            full_response += content
+
+        print()
+        return full_response
 
     def _encode_image(self, image_path: Path) -> str:
         """Закодировать изображение в base64."""
