@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test Solver — варианты раскладки</title>
+<link rel="stylesheet" href="styles (9).css">
+</head>
+<body>
+
+  <div class="app">
+
+    <!-- TOP BAR -->
+    <header class="topbar">
+      <div class="topbar-title">
+        <span class="status-dot"></span>
+        Test Solver
+      </div>
+      <span class="topbar-count">42 вопроса</span>
+    </header>
+
+    <!-- LAYOUT SWITCHER (preview only, not part of final UI) -->
+    <nav class="layout-switch">
+      <button class="lw-btn lw-active" data-layout="a" type="button">A · Ответ сверху</button>
+      <button class="lw-btn" data-layout="b" type="button">B · Бок о бок</button>
+      <button class="lw-btn" data-layout="c" type="button">C · Фото-миниатюра</button>
+    </nav>
+
+    <!-- TABS -->
+    <nav class="tabs">
+      <button class="tab tab-active" type="button">Текущий вопрос</button>
+      <button class="tab" type="button">История <span class="tab-count">42</span></button>
+    </nav>
+
+    <!-- ===================== LAYOUT A: answer on top, photo below ===================== -->
+    <section class="layout layout-a">
+
+      <div class="answer-card">
+        <div class="answer-header">
+          <div class="model-tag">
+            <span class="model-name">qwen2.5vl:7b</span>
+            <span class="model-badge">OLLAMA · LOCAL</span>
+          </div>
+          <div class="state-tag state-typing">
+            печатает
+            <span class="typing-dots"><span></span><span></span><span></span></span>
+          </div>
+        </div>
+        <div class="answer-body">
+          <p class="answer-text">
+            Правильный вариант — <strong>C</strong>. Реакция нейтрализации экзотермическая,
+            выделяется около 57 кДж/моль<span class="cursor"></span>
+          </p>
+        </div>
+      </div>
+
+      <details class="card photo-collapsible" open>
+        <summary class="card-header">
+          <div class="card-header-label">
+            <svg class="file-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+              <rect x="3" y="3" width="18" height="18" rx="2"/>
+              <circle cx="9" cy="9" r="1.7"/>
+              <path d="M21 15l-5-5L5 21"/>
+            </svg>
+            <span class="filename">42<span class="filename-ext">.png</span></span>
+          </div>
+          <span class="timestamp">получен 14:32:08</span>
+        </summary>
+        <div class="screenshot-frame screenshot-frame-medium">
+          <img src="https://placehold.co/600x300/eef1f0/8a9590?text=%D1%81%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA+%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%D0%B0" alt="скриншот вопроса">
+        </div>
+      </details>
+
+    </section>
+
+    <!-- ===================== LAYOUT B: side by side ===================== -->
+    <section class="layout layout-b hidden">
+
+      <div class="side-by-side">
+        <div class="answer-card sbs-answer">
+          <div class="answer-header">
+            <div class="model-tag">
+              <span class="model-name">qwen2.5vl:7b</span>
+              <span class="model-badge">OLLAMA · LOCAL</span>
+            </div>
+            <div class="state-tag state-typing">
+              печатает
+              <span class="typing-dots"><span></span><span></span><span></span></span>
+            </div>
+          </div>
+          <div class="answer-body">
+            <p class="answer-text">
+              Правильный вариант — <strong>C</strong>. Реакция нейтрализации экзотермическая,
+              выделяется около 57 кДж/моль<span class="cursor"></span>
+            </p>
+          </div>
+        </div>
+
+        <div class="card sbs-photo">
+          <div class="card-header">
+            <div class="card-header-label">
+              <svg class="file-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                <circle cx="9" cy="9" r="1.7"/>
+                <path d="M21 15l-5-5L5 21"/>
+              </svg>
+              <span class="filename">42<span class="filename-ext">.png</span></span>
+            </div>
+            <span class="timestamp">14:32:08</span>
+          </div>
+          <div class="screenshot-frame screenshot-frame-small">
+            <img src="https://placehold.co/400x500/eef1f0/8a9590?text=%D1%81%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA" alt="скриншот вопроса">
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ===================== LAYOUT C: photo as thumbnail in answer header ===================== -->
+    <section class="layout layout-c hidden">
+
+      <div class="answer-card">
+        <div class="answer-header answer-header-withthumb">
+          <div class="model-tag">
+            <img class="thumb-inline" src="https://placehold.co/64x64/eef1f0/8a9590?text=42" alt="скриншот 42">
+            <div class="model-tag-text">
+              <span class="model-name">qwen2.5vl:7b</span>
+              <span class="model-badge">OLLAMA · LOCAL</span>
+            </div>
+          </div>
+          <div class="state-tag state-typing">
+            печатает
+            <span class="typing-dots"><span></span><span></span><span></span></span>
+          </div>
+        </div>
+        <div class="answer-body">
+          <p class="answer-text">
+            Правильный вариант — <strong>C</strong>. Реакция нейтрализации экзотермическая,
+            выделяется около 57 кДж/моль<span class="cursor"></span>
+          </p>
+        </div>
+        <button class="expand-photo-btn" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" width="14" height="14">
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
+            <circle cx="9" cy="9" r="1.7"/>
+            <path d="M21 15l-5-5L5 21"/>
+          </svg>
+          показать скриншот целиком
+        </button>
+        <div class="screenshot-frame screenshot-frame-medium screenshot-frame-expand hidden">
+          <img src="https://placehold.co/600x300/eef1f0/8a9590?text=%D1%81%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA+%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%D0%B0" alt="скриншот вопроса">
+        </div>
+      </div>
+
+    </section>
+
+    <footer class="status-bar">localhost:8000 · обновление в реальном времени</footer>
+
+  </div>
+
+  <!-- preview-only script: layout switcher + tab switcher + expand button -->
+  <script>
+    const lwButtons = document.querySelectorAll('.lw-btn');
+    const layouts = {
+      a: document.querySelector('.layout-a'),
+      b: document.querySelector('.layout-b'),
+      c: document.querySelector('.layout-c'),
+    };
+    lwButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        lwButtons.forEach(b => b.classList.remove('lw-active'));
+        btn.classList.add('lw-active');
+        Object.entries(layouts).forEach(([key, el]) => {
+          el.classList.toggle('hidden', key !== btn.dataset.layout);
+        });
+      });
+    });
+
+    const expandBtn = document.querySelector('.expand-photo-btn');
+    if (expandBtn) {
+      expandBtn.addEventListener('click', () => {
+        const frame = document.querySelector('.screenshot-frame-expand');
+        frame.classList.toggle('hidden');
+        expandBtn.textContent = frame.classList.contains('hidden')
+          ? ' показать скриншот целиком'
+          : ' скрыть скриншот';
+      });
+    }
+  </script>
+
+</body>
+</html>
